@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+  arm-glibc-generator:
+    container_name: arm-glibc-generator
+    image: arm-glibc-generator
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      WORK_DIR: '/home/app'
+      GLIBC_VERSION: '2.29'
+    volumes:
+      - .:/home/app
+    entrypoint: 'python3 ./glibc/docker-entrypoint.py'
+
+  arm-commoncpp-generator:
+    container_name: arm-commoncpp-generator
+    image: arm-commoncpp-generator
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      WORK_DIR: '/home/app'
+      COMMONCPP_VERSION: '1.8.1'
+    volumes:
+      - .:/home/app
+    entrypoint: 'python3 ./commoncpp/docker-entrypoint.py'
